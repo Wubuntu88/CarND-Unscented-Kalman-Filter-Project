@@ -64,9 +64,16 @@ public:
   ///* Augmented state dimension
   int n_aug_;
 
+  int n_p_;
+
   ///* Sigma point spreading parameter
   double lambda_;
 
+  Eigen::MatrixXd R_laser_;
+  Eigen::MatrixXd R_radar_;
+  Eigen::MatrixXd H_laser_;
+
+  float not_zero;
 
   /**
    * Constructor
@@ -102,6 +109,17 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+  /*
+   * Creates a Matrix of Sigma points
+   */
+  MatrixXd createSigmaPoints();
+
+  MatrixXd predictSigmaPoints(MatrixXd Xsig_aug, double dt);
+
+  void predictMeanAndCovariance(VectorXd* x_output, MatrixXd* P_output);
+
+  double normalizeAngle(double angle);
 };
 
 #endif /* UKF_H */
