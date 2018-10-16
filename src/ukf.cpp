@@ -120,7 +120,7 @@ void UKF::ProcessMeasurement(MeasurementPackage measurement_pack) {
     is_initialized_ = true;
   }
   /*
-   * If the
+   * Executed when the UKF is not initialized
    */
   else {
     float dt = (measurement_pack.timestamp_ - time_us_) / 1000000.0;  //convert to seconds
@@ -352,34 +352,3 @@ double UKF::normalizeAngle(double angle) {
   }
   return angle;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
