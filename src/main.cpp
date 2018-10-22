@@ -106,7 +106,6 @@ int main() {
 
               //Call ProcessMeasurment(meas_package) for Kalman filter
               ukf.ProcessMeasurement(meas_package);
-              cout << "Processed measurement" << endl;
               //Push the current estimated x,y positon from the Kalman filter's state vector
 
               VectorXd estimate(4);
@@ -126,9 +125,7 @@ int main() {
 
               estimations.push_back(estimate);
 
-              cout << "Calculating RMSE" << endl;
               VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
-              cout << "Calculated RMSE" << endl;
 
               json msgJson;
               msgJson["estimate_x"] = p_x;
@@ -140,7 +137,6 @@ int main() {
               auto msg = "42[\"estimate_marker\"," + msgJson.dump() + "]";
               std::cout << "message to send: " << msg << std::endl;
               ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
-              std::cout << "sent message" << std::endl;
             }
           } else {
 
